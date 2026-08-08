@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  crypto-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: crypto-bot
+    restart: unless-stopped
+    environment:
+      - LOG_LEVEL=INFO
+      - TZ=UTC
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    # Add environment variables from .env file
+    env_file:
+      - .env.example
+    # Uncomment if your bot exposes an API
+    # ports:
+    #   - "8000:8000"
